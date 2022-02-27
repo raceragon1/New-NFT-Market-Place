@@ -379,11 +379,11 @@
 	},
 	"sources": {
 		"Erc20Modified.sol": {
-			"keccak256": "0xc2bb1d78f96251ecf10a7246a3c01b15448889517e6e4e37882446360294a7a2",
+			"keccak256": "0x12fc000cb5ee96ea1818cc6db5fc76bf84986f0e3eba51f2f29b6ef784fa727d",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://68abc69cbf867e20645e18df2977f8835c192a8feb995d0d94232b9666209560",
-				"dweb:/ipfs/QmZEmPjonNyrMyJ8ge7TDTWjfzHnRXRVpPqYK7vyJCn3fz"
+				"bzz-raw://d6c1d042e9d7968e589008826e34b43c2f24783b2cb7e39cc8ccb2e0bacd01a0",
+				"dweb:/ipfs/QmTwCnEyDksvhp1BpxW6nWX7zxtCRGq6AELu4JNYYKNBNH"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol": {

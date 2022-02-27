@@ -8,47 +8,43 @@ import "./Erc721Modified.sol";
 contract MintFactory {
 
     //Array of ERC20 Contracts deployed
-    ModErc20[] public tokenContractArray;
+    Erc20Modified[] public tokenContractArray;
 
     //creating mapping of NFT stored to make an condition for minitng ERC20 tokens against it
-    mapping(address => mapping(uint => bool)) tokenToBool;
+    mapping(address => mapping(uint => bool)) conditionTokenStored;
 
     //mapping ERC 20 token address to NFT id
     mapping(address => uint) ERC20AddressToTokenId; 
     
-    //Creating mapping of NFT to address (original staker) that deposited the NFT 
-    mapping(uint => address) tokenToNFTAddress; 
 
     
     constructor() {}
 
 
     //store(Stake) function to deposit NFT
-    function store(address _NFTcontarctAddress, uint _NFTtokenId) public {
-        ERC721Modified(_NFTcontarctAddress).transfer(
+    function store(address _NFTcontractAddress, uint _NFTtokenId) public {
+        Erc721Modified(_NFTcontractAddress).transfer(
             msg.sender, 
             address(this), 
             _NFTtokenId
         );
 
-        tokenToNFTAddress[_NFTtokenId] = _NFTcontarctAddress;
 
-        tokenToBool[msg.sender][_NFTtokenId] = true;
+        conditionTokenStored[msg.sender][_NFTtokenId] = true;
     }
 
 
     //Function to retrive NFT
     //Should be able to retrive without making token
 
-    function retrive(uint256 _tokenContarctIndex) public {
-        address ERC20Address = address(tokenContractArray[_tokenContarctIndex]);
+    function retrieve(uint256 _tokenContractIndex, address _NFTcontractAddress) public {
+        address ERC20Address = address(tokenContractArray[_tokenContractIndex]);
 
-        Erc20Modified(ERC20Address).burnall();
+        require (uint256 (Erc20Modified(ERC20Address).totalSupply()) == 0);
 
         uint _NFTtokenId = ERC20AddressToTokenId[ERC20Address];
-        address _NFTcontarctAddress = tokenToNFTAddress[_NFTtokenId];
         
-        ERC721Modified(_NFTcontarctAddress).transfer(
+        Erc721Modified(_NFTcontractAddress).transfer(
             address(this), 
             msg.sender, 
             _NFTtokenId
@@ -65,7 +61,7 @@ contract MintFactory {
         public 
     {
 
-       require(tokenToBool[msg.sender][_NFTtokenId] == true) ;
+       require(conditionTokenStored[msg.sender][_NFTtokenId] == true) ;
 
        Erc20Modified tokenContract = new Erc20Modified(_name,_symbol);
        tokenContractArray.push(tokenContract);    

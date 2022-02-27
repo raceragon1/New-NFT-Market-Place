@@ -10,6 +10,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 contract Erc20Modified is ERC20 {
     string _name;
     string _symbol;
+    uint _totalSupply = totalSupply();
+    
 
     constructor(string memory name_, string memory symbol_) ERC20(name_, symbol_)
     {
@@ -25,58 +27,5 @@ contract Erc20Modified is ERC20 {
         uint _amount = totalSupply();
         _burn(msg.sender, _amount);
     }
-
-//////////////////////////////////////////////////////////////////////////
-/*
-//Minting tokens
-    function mintERC20Tokens(
-        uint256 _amount, 
-       // uint256 _tokenContarctIndex/
-       address _ERC20contarctAddress
-    ) 
-        public 
-    {
-        address _minter = msg.sender;
-        MintPalace(_ERC20contarctAddress).mint(_minter,_amount);
-        //MintPalace(tokenContractArray[_tokenContarctIndex]).mint(_minter,_amount);
-    }
-
-
-    //Transfering tokens
-    function transferERC20tokens(
-        address _to, 
-        uint256 _amount, 
-        uint256 _tokenContarctIndex
-    ) 
-        public 
-    {
-        MintPalace(address(tokenContractArray[_tokenContarctIndex])).transfer(_to,_amount);
-
-    }
- 
-
-    //View token information
-   function viewERC20tokens(uint256 _tokenContarctIndex) 
-       public 
-       view 
-       returns (
-            string memory, 
-            string memory, 
-            uint256
-        ) 
-    {
-        MintPalace ERC20TokenContarct = MintPalace(address(tokenContractArray[_tokenContarctIndex]));
-
-        return (
-            ERC20TokenContarct.name(),
-            ERC20TokenContarct.symbol(),
-            ERC20TokenContarct.totalSupply()
-        );
-    }   
-
-
-Still have to add require statements for all
-create a connect between the NFT and ERC token
-*/ 
-
+  
 }
